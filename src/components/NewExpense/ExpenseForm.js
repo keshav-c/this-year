@@ -3,19 +3,44 @@ import React, { useState } from 'react';
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-  // useState input is empty string because input from form fields is always a string
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+// useState input is empty string because input from form fields is always a string
+//   const [enteredTitle, setEnteredTitle] = useState("");
+//   const [enteredAmount, setEnteredAmount] = useState("");
+//   const [enteredDate, setEnteredDate] = useState("");
 
+// use a state buffer object instead of multiple individual state variables.
+  const [userInput, setUserInput] = useState({
+      enteredTitle: '',
+      enteredAmount: '',
+      enteredDate: ''
+  })
+
+//   const changeTitleHandler = (event) => {
+//     setEnteredTitle(event.target.value);
+//   };
   const changeTitleHandler = (event) => {
-    setEnteredTitle(event.target.value);
+      setUserInput({
+          ...userInput,
+          enteredTitle: event.target.value
+      })
   };
+//   const changeAmountHandler = (event) => {
+//     setEnteredAmount(event.target.value);
+//   };
   const changeAmountHandler = (event) => {
-    setEnteredAmount(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredAmount: event.target.value,
+    });
   };
+//   const changeDateHandler = (event) => {
+//     setEnteredDate(event.target.value);
+//   };
   const changeDateHandler = (event) => {
-    setEnteredDate(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredDate: event.target.value,
+    });
   };
 
   return (
