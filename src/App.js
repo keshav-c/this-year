@@ -6,7 +6,7 @@ import NewExpense from "./components/NewExpense/NewExpense";
 const DUMMY_EXPENSES = [
     {
       id: "e1",
-      date: new Date(2021, 6, 13),
+      date: new Date(2020, 6, 13),
       title: "Health Insurance",
       amount: 500,
     },
@@ -34,12 +34,9 @@ const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES)
 
   const addExpenseHandler = (expense) => {
-    setExpenses(oldExpenses => [expense, ...oldExpenses])
-
-    console.log("In App.js");
-    console.log(expense);
+    setExpenses((oldExpenses) => [expense, ...oldExpenses])
   };
-  
+
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler}/>
