@@ -8,7 +8,7 @@ import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState('All');
-  const shownExpenses = props.items.filter(expense => {
+  const filteredExpenses = props.items.filter(expense => {
     if (filteredYear === "All") {
       return true;
     } else {
@@ -20,18 +20,23 @@ const Expenses = (props) => {
     setFilteredYear(year);
   };
 
+  let expensesContent = <p>{`No Expenses Found for ${filteredYear}.`}</p>;
+  if (filteredExpenses.length > 0) {
+    expensesContent = filteredExpenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+    ));
+  }
+
   return (
     <div>
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}/>
       <Card className="expenses">
-        {shownExpenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {expensesContent}
       </Card>
     </div>
   );
