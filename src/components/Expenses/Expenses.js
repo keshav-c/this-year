@@ -9,6 +9,7 @@ import ExpensesChart from "./ExpensesChart";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("All");
+  const [showChart, setShowChart] = useState(false);
   const filteredExpenses = props.items.filter((expense) => {
     if (filteredYear === "All") {
       return true;
@@ -18,6 +19,11 @@ const Expenses = (props) => {
   });
 
   const filterChangeHandler = (year) => {
+    if (year !== "All") {
+      setShowChart(true);
+    } else {
+      setShowChart(false);
+    }
     setFilteredYear(year);
   };
 
@@ -28,7 +34,7 @@ const Expenses = (props) => {
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
-        <ExpensesChart filteredExpenses={filteredExpenses} />
+        {showChart && <ExpensesChart filteredExpenses={filteredExpenses} />}
         <ExpensesList items={filteredExpenses} />
       </Card>
     </div>
